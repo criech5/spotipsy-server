@@ -34,7 +34,7 @@ def get_auth():
 
     access_body = {'grant_type': 'authorization_code',
                    'code': auth_code,
-                   'redirect_uri': 'http://ec2-3-19-57-186.us-east-2.compute.amazonaws.com:5000/auth',
+                   'redirect_uri': 'https://spotipsy.herokuapp.com/auth',
                    'client_id': '136c245c7f744cf1844b2bb64aadbcb1',
                    'client_secret': 'a954bbaf3e7f444e9d3bee48c10e7656'}
     access_response = requests.post('https://accounts.spotify.com/api/token', data=access_body).json()
@@ -54,4 +54,4 @@ def get_data():
 
 
 if __name__ =='__main__':
-    api.run(host="0.0.0.0", port=5000)
+    api.run()
