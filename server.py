@@ -53,5 +53,11 @@ def get_data():
     return data_json
 
 
+@api.route('/helloworld')
+def hello_world():
+    # I can't get my deploys to work correctly, and this is a lot easier to test lol
+    print('Hello, world!')
+
+
 if __name__ =='__main__':
     api.run()
