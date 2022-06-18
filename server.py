@@ -6,6 +6,7 @@ from flask import Flask, request, Response, jsonify, redirect
 from flask_cors import CORS
 import SpotiPsy
 import SpotiPayload
+import UserTracker
 
 global access_token
 
@@ -51,6 +52,11 @@ def get_data():
     tracks = SpotiPsy.get_play_data(access_token, False)
     data_json = SpotiPayload.create_payload(access_token, tracks)
     return data_json
+
+
+@api.route('/automate')
+def do_automate(email):
+    UserTracker.edit_users('criech5@gmail.com', 'Bioniko14!', email)
 
 
 @api.route('/helloworld')
