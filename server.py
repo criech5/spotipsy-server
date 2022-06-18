@@ -54,7 +54,7 @@ def get_data():
     return data_json
 
 
-@api.route('/automate')
+@api.route('/automate/<email>')
 def do_automate(email):
     UserTracker.edit_users('criech5@gmail.com', 'Bioniko14!', email)
 
