@@ -82,7 +82,3 @@ def add_user(driver, new_email):
     add_button.click()
     print(f'User {new_email} has been added.')
 
-
-if __name__ == '__main__':
-    edit_users('criech5@gmail.com', 'Bioniko14!', 'user30@gmail.com')
-
