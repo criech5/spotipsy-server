@@ -63,6 +63,7 @@ def do_automate(email):
 def hello_world():
     # I can't get my deploys to work correctly, and this is a lot easier to test lol
     print('Hello, world!')
+    return 'Hello, world!'
 
 
 if __name__ =='__main__':
