@@ -37,8 +37,8 @@ def get_auth():
     access_body = {'grant_type': 'authorization_code',
                    'code': auth_code,
                    'redirect_uri': 'https://spotipsy.herokuapp.com/auth',
-                   'client_id': '136c245c7f744cf1844b2bb64aadbcb1',
-                   'client_secret': 'a954bbaf3e7f444e9d3bee48c10e7656'}
+                   'client_id': os.environ.get('CLIENT_ID'),
+                   'client_secret': os.environ.get('CLIENT_SECRET')}
     access_response = requests.post('https://accounts.spotify.com/api/token', data=access_body).json()
     expires_in = access_response['expires_in']
     global access_token
@@ -55,9 +55,10 @@ def get_data():
     return data_json
 
 
-@api.route('/automate/')
-def do_automate():
-    UserTracker.edit_users(os.environ.get('USERNAME'), os.environ.get('PASSWORD'), 'criech5@gmail.com')
+@api.route('/automate/<email>')
+def do_automate(email):
+    UserTracker.edit_users(os.environ.get('USERNAME'), os.environ.get('PASSWORD'), email)
+    return f'Successfully added {email}'
 
 
 @api.route('/helloworld')

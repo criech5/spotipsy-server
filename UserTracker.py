@@ -15,7 +15,7 @@ def edit_users(login, password, email):
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
-    # driver = webdriver.Chrome(ChromeDriverManager().install())
+    # driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
     driver.get('https://developer.spotify.com/dashboard/login')
     driver.implicitly_wait(0.5)
     login_button = driver.find_element(by=By.CSS_SELECTOR, value="button[data-ng-click='login()']")
