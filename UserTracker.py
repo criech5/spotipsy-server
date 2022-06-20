@@ -1,3 +1,4 @@
+import os
 import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -8,7 +9,13 @@ from selenium.webdriver.common.by import By
 
 
 def edit_users(login, password, email):
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    options = webdriver.ChromeOptions()
+    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    options.add_argument("--headless")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
+    # driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get('https://developer.spotify.com/dashboard/login')
     driver.implicitly_wait(0.5)
     login_button = driver.find_element(by=By.CSS_SELECTOR, value="button[data-ng-click='login()']")
@@ -84,5 +91,5 @@ def add_user(driver, new_email):
 
 
 if __name__ == '__main__':
-    edit_users('criech5@gmail.com', 'Bioniko14!', 'user30@gmail.com')
+    edit_users(os.environ.get('USERNAME'), os.environ.get('PASSWORD'), 'user30@gmail.com')
 

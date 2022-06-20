@@ -1,4 +1,5 @@
 import sys
+import os
 
 import requests
 import json
@@ -13,7 +14,7 @@ import Artist
 def authorize():
     # This GET and webbrowser thing should probably be handled client-side when that gets built
     response = requests.get('https://accounts.spotify.com/authorize?'
-                 'client_id=136c245c7f744cf1844b2bb64aadbcb1&'
+                 f'client_id={os.environ.get("CLIENT_ID")}&'
                  'response_type=code&'
                  'redirect_uri=http://127.0.0.1:5000/&'
                  'scope=playlist-read-private%20playlist-modify-private%20playlist-modify-public'
@@ -27,8 +28,8 @@ def authorize():
     access_body = {'grant_type': 'authorization_code',
                    'code': auth_code,
                    'redirect_uri': 'http://127.0.0.1:5000/',
-                   'client_id': '136c245c7f744cf1844b2bb64aadbcb1',
-                   'client_secret': 'a954bbaf3e7f444e9d3bee48c10e7656'}
+                   'client_id': os.environ.get('CLIENT_ID'),
+                   'client_secret': os.environ.get('CLIENT_SECRET')}
     access_response = requests.post('https://accounts.spotify.com/api/token', data=access_body).json()
     expires_in = access_response['expires_in']
     access_token = access_response['access_token']
