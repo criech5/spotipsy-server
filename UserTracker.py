@@ -10,12 +10,12 @@ from selenium.webdriver.common.by import By
 
 def edit_users(login, password, email):
     options = webdriver.ChromeOptions()
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    # options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     options.add_argument("--headless")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
-    # driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
+    # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
     driver.get('https://developer.spotify.com/dashboard/login')
     driver.implicitly_wait(0.5)
     login_button = driver.find_element(by=By.CSS_SELECTOR, value="button[data-ng-click='login()']")
@@ -39,6 +39,7 @@ def edit_users(login, password, email):
     if continue_button:
         continue_button.click()
     # Switch back to the other window, which should now be logged in, and close banner notif
+    driver.implicitly_wait(1)
     driver.switch_to.window(windows[0])
     driver.implicitly_wait(10)
     cookie_close_button = driver.find_element(by=By.ID, value="onetrust-close-btn-container")
@@ -55,8 +56,6 @@ def edit_users(login, password, email):
     users_button.click()
     driver.implicitly_wait(1)
 
-
-    print(email)
     table_rows = driver.find_elements(by=By.XPATH, value="//table/tbody/tr")
     users = []
     for row in table_rows:
@@ -91,5 +90,5 @@ def add_user(driver, new_email):
 
 
 if __name__ == '__main__':
-    edit_users(os.environ.get('USERNAME'), os.environ.get('PASSWORD'), 'user30@gmail.com')
+    edit_users('@gmail.com', '', 'user60@gmail.com')
 
