@@ -42,4 +42,4 @@ def release_to_date(release, precision):
 
 
 def text_to_time(text):
-    return datetime.datetime.strptime(text, '%Y-%m-%dT%H:%M:%S.%fZ')
+    return datetime.datetime.strptime(text, '%Y-%m-%dT%H:%M:%S:%fZ')
