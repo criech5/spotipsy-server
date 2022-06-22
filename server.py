@@ -44,7 +44,7 @@ def get_auth():
     global access_token
     access_token = access_response['access_token']
     refresh_token = access_response['refresh_token']
-    return redirect('http://criech5.github.io/#/spotipsy/signedin', code=302)
+    return redirect('http://criech5.github.io/project-site/#/spotipsy/signedin', code=302)
 
 
 @api.route('/psy')
