@@ -42,7 +42,9 @@ def release_to_date(release, precision):
 
 
 def text_to_time(text):
+    date_text = ''
     try:
-        return datetime.datetime.strptime(text, '%Y-%m-%dT%H:%M:%S:%fZ')
-    except:
-        return datetime.datetime.strptime(text, '%Y-%m-%dT%H:%M:%S.%fZ')
+        date_text = datetime.datetime.strptime(text, '%Y-%m-%dT%H:%M:%S:%fZ')
+    except ValueError:
+        date_text = datetime.datetime.strptime(text, '%Y-%m-%dT%H:%M:%S.%fZ')
+    return date_text
