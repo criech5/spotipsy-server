@@ -22,7 +22,10 @@ def edit_users(login, password, email):
     login_button.click()
     driver.implicitly_wait(0.5)
     # Switch to the login popup window and select facebook
-    windows = driver.current_window_handle
+    WebDriverWait(driver, 10).until(
+        ExpectedConditions.number_of_windows_to_be(2)
+    )
+    windows = driver.window_handles
     driver.switch_to.window(windows[1])
     driver.implicitly_wait(0.5)
     facebook_button = driver.find_element(by=By.CSS_SELECTOR, value="button[data-testid='facebook-login']")
