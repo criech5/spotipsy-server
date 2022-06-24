@@ -66,7 +66,7 @@ def get_data():
 
 @api.route('/automate/<email>')
 def do_automate(email):
-    UserTracker.edit_users('criech5@gmail.com', 'Bioniko14!', email)
+    UserTracker.edit_users(os.environ.get('USERNAME'), os.environ.get('PASSWORD'), email)
     return email
 
 
