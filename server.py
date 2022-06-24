@@ -24,6 +24,11 @@ CORS(api)
 #     return redirect('https://coleriechert.com', code=302)
 
 
+@api.route('/auth2')
+def auth_two():
+    SpotiPsy.authorize()
+
+
 @api.route('/auth')
 def get_auth():
     auth_code = request.query_string.decode(encoding='utf-8')[5:]
@@ -36,7 +41,10 @@ def get_auth():
 
     access_body = {'grant_type': 'authorization_code',
                    'code': auth_code,
+                   # 'redirect_uri': 'http://127.0.0.1:5000/auth',
                    'redirect_uri': 'https://spotipsy.herokuapp.com/auth',
+                   # 'client_id': '136c245c7f744cf1844b2bb64aadbcb1',
+                   # 'client_secret': 'a954bbaf3e7f444e9d3bee48c10e7656'}
                    'client_id': os.environ.get('CLIENT_ID'),
                    'client_secret': os.environ.get('CLIENT_SECRET')}
     access_response = requests.post('https://accounts.spotify.com/api/token', data=access_body).json()
@@ -44,6 +52,7 @@ def get_auth():
     global access_token
     access_token = access_response['access_token']
     refresh_token = access_response['refresh_token']
+    # return redirect('http://localhost:3000/project-site/#/spotipsy/signedin', code=302)
     return redirect('http://criech5.github.io/project-site/#/spotipsy/signedin', code=302)
 
 
@@ -69,4 +78,4 @@ def hello_world():
 
 
 if __name__ =='__main__':
-    api.run()
+    api.run(debug=True)

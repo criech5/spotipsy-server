@@ -28,8 +28,8 @@ def authorize():
     access_body = {'grant_type': 'authorization_code',
                    'code': auth_code,
                    'redirect_uri': 'http://127.0.0.1:5000/',
-                   'client_id': os.environ.get('CLIENT_ID'),
-                   'client_secret': os.environ.get('CLIENT_SECRET')}
+                   'client_id': '136c245c7f744cf1844b2bb64aadbcb1',
+                   'client_secret': 'a954bbaf3e7f444e9d3bee48c10e7656'}
     access_response = requests.post('https://accounts.spotify.com/api/token', data=access_body).json()
     expires_in = access_response['expires_in']
     access_token = access_response['access_token']
