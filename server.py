@@ -52,8 +52,8 @@ def get_auth():
 
 @api.route('/psy')
 def get_data():
+    sleep(3)
     global access_token
-    sleep(2)
     tracks = SpotiPsy.get_play_data(access_token, False)
     data_json = SpotiPayload.create_payload(access_token, tracks)
     return data_json
