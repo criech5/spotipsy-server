@@ -93,5 +93,5 @@ def add_user(driver, new_email):
 
 
 if __name__ == '__main__':
-    edit_users('@gmail.com', '', 'user60@gmail.com')
+    edit_users('@gmail.com', '', 'userXX@gmail.com')
 

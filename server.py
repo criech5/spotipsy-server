@@ -1,10 +1,9 @@
-import json
-import sys
 import os
 
 import requests
 from flask import Flask, request, Response, jsonify, redirect
 from flask_cors import CORS
+from time import sleep
 import SpotiPsy
 import SpotiPayload
 import UserTracker
@@ -22,11 +21,6 @@ CORS(api)
 #         with open('auth.txt', 'w') as auth_file:
 #             auth_file.write(code)
 #     return redirect('https://coleriechert.com', code=302)
-
-
-@api.route('/auth2')
-def auth_two():
-    SpotiPsy.authorize()
 
 
 @api.route('/auth')
@@ -59,6 +53,7 @@ def get_auth():
 @api.route('/psy')
 def get_data():
     global access_token
+    sleep(2)
     tracks = SpotiPsy.get_play_data(access_token, False)
     data_json = SpotiPayload.create_payload(access_token, tracks)
     return data_json
